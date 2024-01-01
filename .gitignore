@@ -74,3 +74,4 @@ crashlytics-build.properties
 /YakuzaMod/bin/Debug/netstandard2.1
 /YakuzaMod/obj
 /YakuzaMod/NuGet.Config
+/YakuzaMod/Patches

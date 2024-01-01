@@ -5,7 +5,6 @@ using System.IO;
 using System.Reflection;
 using Unity.Netcode.Components;
 using UnityEngine;
-using YakuzaMod.Extensions;
 using YakuzaMod.MonoBehaviours;
 
 namespace YakuzaMod
@@ -91,8 +90,8 @@ namespace YakuzaMod
 
             customItems = new List<CustomItem>()
             {
-                CustomScrap.Add("Cupcake", "Assets/Scrap/Cupcake/Cupcake.asset", Levels.LevelTypes.All, Config.cupcakeSpawnChance.Value),
                 CustomScrap.Add("Kiryu", "Assets/Scrap/KazumaKiryu/Kiryu.asset", Levels.LevelTypes.All, Config.kiryuSpawnChance.Value),
+                CustomScrap.Add("Majima", "Assets/Scrap/Majima/Majima.asset", Levels.LevelTypes.All, Config.majimaSpawnChance.Value),
                 CustomScrap.Add("Yakuza0", "Assets/Scrap/Yakuza0Case/Yakuza0.asset", Levels.LevelTypes.All, Config.yakuza0SpawnChance.Value),
                 CustomScrap.Add("YakuzaKiwami1", "Assets/Scrap/YakuzaK1Case/YakuzaKiwami1.asset", Levels.LevelTypes.All, Config.yakuzaK1SpawnChance.Value),
                 CustomScrap.Add("YakuzaKiwami2", "Assets/Scrap/YakuzaK2Case/YakuzaKiwami2.asset", Levels.LevelTypes.All, Config.yakuzaK2SpawnChance.Value),
@@ -127,12 +126,13 @@ namespace YakuzaMod
                 
                 if(item is CustomScrap)
                 {
+                    Plugin.logger.LogInfo($"Registering scrap item {item.name}");
                     Items.RegisterScrap(itemAsset, ((CustomScrap)item).rarity, ((CustomScrap)item).levelType);
                 }
                 else if(item is CustomShopItem)
                 {
                     var itemInfo = MainAssets.LoadAsset<TerminalNode>(item.infoPath);
-                    Plugin.logger.LogInfo($"Regustering shop item {item.name} with price {((CustomShopItem)item).itemPrice}");
+                    Plugin.logger.LogInfo($"Registering shop item {item.name} with price {((CustomShopItem)item).itemPrice}");
                     Items.RegisterShopItem(itemAsset, null, null, itemInfo, ((CustomShopItem)item).itemPrice);
                 }
 
